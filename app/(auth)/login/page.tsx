@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
@@ -7,8 +8,12 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
+  const params = useSearchParams();
 
   const submitForm = () => {
+    // setLoading(true);
+
     console.log("Form Submitted success", authState);
   };
 
@@ -130,6 +135,13 @@ export default function Login() {
                   Create a free account
                 </Link>
               </p>
+              {params.get("message") ? (
+                <p className="bg-green-400 font-bold rounded-md p-4">
+                  {params.get("message")}
+                </p>
+              ) : (
+                <></>
+              )}
               <form action="#" method="POST" className="mt-8">
                 <div className="space-y-5">
                   <div>

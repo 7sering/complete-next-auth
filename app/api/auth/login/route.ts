@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         );
       }
       return NextResponse.json(
-        { status: 400, message: "Please check your credentials !" },
+        { status: 400, message: "Please check your credentials!" },
         { status: 200 }
       );
     }
