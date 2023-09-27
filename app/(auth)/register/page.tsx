@@ -8,7 +8,7 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
-    password_confirm: "",
+    password_confirmation: "",
   });
 
   const submitForm = () => {
@@ -215,7 +215,7 @@ export default function Register() {
                         onChange={(e) =>
                           setAuthState({
                             ...authState,
-                            password_confirm: e.target.value,
+                            password_confirmation: e.target.value,
                           })
                         }
                       ></input>
