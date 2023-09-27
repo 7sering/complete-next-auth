@@ -1,6 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Register() {
+  const [authState, setAuthState] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirm: "",
+  });
+
+  const submitForm = () => {
+    console.log("Form Submitted success", authState);
+  };
   return (
     <>
       <section>
@@ -9,7 +22,7 @@ export default function Register() {
             <div className="absolute inset-0">
               <img
                 className="h-full w-full rounded-md object-cover object-top"
-                src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTk0fHxkZXNpZ25lcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+                src="https://plus.unsplash.com/premium_photo-1665203649554-72a6545460a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
                 alt=""
               />
             </div>
@@ -135,6 +148,9 @@ export default function Register() {
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="text"
                         placeholder="Name"
+                        onChange={(e) =>
+                          setAuthState({ ...authState, name: e.target.value })
+                        }
                       ></input>
                     </div>
                   </div>
@@ -151,6 +167,9 @@ export default function Register() {
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="email"
                         placeholder="Email"
+                        onChange={(e) =>
+                          setAuthState({ ...authState, email: e.target.value })
+                        }
                       ></input>
                     </div>
                   </div>
@@ -169,6 +188,12 @@ export default function Register() {
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="password"
                         placeholder="Password"
+                        onChange={(e) =>
+                          setAuthState({
+                            ...authState,
+                            password: e.target.value,
+                          })
+                        }
                       ></input>
                     </div>
                   </div>
@@ -187,6 +212,12 @@ export default function Register() {
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="password"
                         placeholder="Confirm Password"
+                        onChange={(e) =>
+                          setAuthState({
+                            ...authState,
+                            password_confirm: e.target.value,
+                          })
+                        }
                       ></input>
                     </div>
                   </div>
@@ -195,8 +226,9 @@ export default function Register() {
                     <button
                       type="button"
                       className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                      onClick={submitForm}
                     >
-                      Get started{" "}
+                      Register{" "}
                       {/* Get started <ArrowRight className="ml-2" size={16} /> */}
                     </button>
                   </div>
