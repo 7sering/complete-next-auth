@@ -1,6 +1,14 @@
 import SignoutButton from "@/components/signoutButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/opation";
+import { redirect } from "next/navigation";
+import { json } from "stream/consumers";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <>
       <div>
@@ -8,6 +16,7 @@ export default function Home() {
           Next Auth Production Ready
         </h2>
         <center className="mt-5">
+          <p>{JSON.stringify(session)}</p>
           <SignoutButton />
         </center>
       </div>

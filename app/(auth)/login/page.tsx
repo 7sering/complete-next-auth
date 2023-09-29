@@ -1,6 +1,8 @@
 "use client";
 import axios, { Axios } from "axios";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -21,7 +23,12 @@ export default function Login() {
       const response = res.data;
       console.log("The response is", response);
       if (response.status == 200) {
-        console.log("");
+        signIn("credentials", {
+          email: authState.email,
+          password: authState.password,
+          callbackUrl: params.get("callbackUrl") || "/",
+          redirect: true,
+        });
       } else if (response.status == 400) {
         setError(response?.errors);
       }
