@@ -25,25 +25,30 @@ export async function POST(request: NextRequest) {
       );
       if (comparePassword) {
         return NextResponse.json(
-          { status: 200, message: "User Login Successfully!" },
+          { status: 200, message: "User Logged in successfully!" },
           { status: 200 }
         );
       }
       return NextResponse.json(
-        { status: 400, message: "Please check your credentials!" },
+        {
+          status: 400,
+          errors: {
+            email: "Please check your credentials.",
+          },
+        },
+        { status: 200 }
+      );
+    } else {
+      return NextResponse.json(
+        {
+          status: 400,
+          errors: {
+            email: "No User found in our system with above email.",
+          },
+        },
         { status: 200 }
       );
     }
-
-    return NextResponse.json(
-      {
-        status: 200,
-        errors: {
-          email: "No Account found with this email  ",
-        },
-      },
-      { status: 200 }
-    );
   } catch (error) {
     if (error instanceof errors.E_VALIDATION_ERROR) {
       return NextResponse.json(

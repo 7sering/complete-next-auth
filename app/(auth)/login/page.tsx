@@ -1,4 +1,5 @@
 "use client";
+import axios, { Axios } from "axios";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -9,12 +10,24 @@ export default function Login() {
     password: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setError] = useState<LoginErrorType>();
+
   const params = useSearchParams();
 
-  const submitForm = () => {
-    // setLoading(true);
+  const submitForm = async () => {
+    setLoading(true);
+    axios.post("/api/auth/login", authState).then((res) => {
+      setLoading(false);
+      const response = res.data;
+      console.log("The response is", response);
+      if (response.status == 200) {
+        console.log("");
+      } else if (response.status == 400) {
+        setError(response?.errors);
+      }
+    });
 
-    console.log("Form Submitted success", authState);
+    // console.log("Form Submitted success", authState);
   };
 
   return (
@@ -161,6 +174,9 @@ export default function Login() {
                           setAuthState({ ...authState, email: e.target.value })
                         }
                       ></input>
+                      <span className="text-red-500 font-bold">
+                        {errors?.email}
+                      </span>
                     </div>
                   </div>
                   <div>
@@ -193,15 +209,20 @@ export default function Login() {
                           })
                         }
                       ></input>
+                      <span className="text-red-500 font-bold">
+                        {errors?.password}
+                      </span>
                     </div>
                   </div>
                   <div>
                     <button
                       type="button"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                      className={`inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 ${
+                        loading ? "bg-gray" : "bg-black"
+                      }`}
                       onClick={submitForm}
                     >
-                      Submit
+                      {loading ? "Processing.." : "Login"}
                       {/* Get started <ArrowRight className="ml-2" size={16} /> */}
                     </button>
                   </div>

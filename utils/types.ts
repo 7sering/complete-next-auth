@@ -3,3 +3,7 @@ type registerErrorType = {
   name?: string;
   password?: string;
 };
+type LoginErrorType = {
+  email?: string;
+  password?: string;
+};
