@@ -15,6 +15,15 @@ const userSchema = new Schema(
     password: {
       type: Schema.Types.String,
     },
+    avatar: {
+      required: false,
+      type: Schema.Types.String,
+    },
+    role: {
+      required: false,
+      type: Schema.Types.String,
+      default: "User",
+    },
   },
   { timestamps: true }
 );
