@@ -1,11 +1,29 @@
 import { User } from "@/models/User";
 import { connect } from "@/utils/mongo.config";
 import { AuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
   pages: {
     signIn: "/login",
+  },
+  //save google auth user to database
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      try {
+        connect();
+        const findUser = await User.findOne({ email: user.email });
+        if (findUser) {
+          return true;
+        }
+        await User.create({ name: user.name, email: user.email });
+        return true;
+      } catch (error) {
+        console.log("SIGNIN_ERROR", error);
+        return false;
+      }
+    },
   },
   providers: [
     CredentialsProvider({
@@ -35,6 +53,11 @@ export const authOptions: AuthOptions = {
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
+    }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
 };

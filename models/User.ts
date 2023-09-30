@@ -13,7 +13,6 @@ const userSchema = new Schema(
       trim: true,
     },
     password: {
-      required: [true, "Password is required"],
       type: Schema.Types.String,
     },
   },

@@ -37,6 +37,14 @@ export default function Login() {
     // console.log("Form Submitted success", authState);
   };
 
+  // Login with google
+  const googleLogin = async () => {
+    await signIn("google", {
+      callbackUrl: "/",
+      redirect: true,
+    });
+  };
+
   return (
     <>
       <section>
@@ -235,10 +243,12 @@ export default function Login() {
                   </div>
                 </div>
               </form>
+              <p className="text-center my-3">--- OR ---</p>
               <div className="mt-3 space-y-3">
                 <button
                   type="button"
                   className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                  onClick={googleLogin}
                 >
                   <span className="mr-2 inline-block">
                     <svg
