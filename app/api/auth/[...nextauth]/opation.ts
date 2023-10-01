@@ -1,8 +1,22 @@
-import { User } from "@/models/User";
+import { User as UserModel } from "@/models/User";
 import { connect } from "@/utils/mongo.config";
-import { AuthOptions } from "next-auth";
+import { AuthOptions, ISODateString, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { JWT } from "next-auth/jwt";
+
+export type CustomSession = {
+  user?: CustomUser;
+  expires: ISODateString;
+};
+
+export type CustomUser = {
+  id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  role?: string | null;
+  avatar?: string | null;
+};
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -13,16 +27,39 @@ export const authOptions: AuthOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       try {
         connect();
-        const findUser = await User.findOne({ email: user.email });
+        const findUser = await UserModel.findOne({ email: user.email });
         if (findUser) {
           return true;
         }
-        await User.create({ name: user.name, email: user.email });
+        await UserModel.create({
+          email: user.email,
+          name: user.name,
+          role: "User",
+        });
         return true;
       } catch (error) {
         console.log("SIGNIN_ERROR", error);
         return false;
       }
+    },
+    async jwt({ token, user }: { token: JWT; user: CustomUser }) {
+      if (user) {
+        user.role = user?.role == null ? "User" : user?.role;
+        token.user = user;
+      }
+      return token;
+    },
+    async session({
+      session,
+      token,
+      user,
+    }: {
+      session: CustomSession;
+      token: JWT;
+      user: User;
+    }) {
+      session.user = token.user as CustomUser;
+      return session;
     },
   },
   providers: [
@@ -41,7 +78,7 @@ export const authOptions: AuthOptions = {
       async authorize(credentials, req) {
         // const user = { id: "1", name: "J Smith", email: credentials?.email };
         connect();
-        const user = await User.findOne({ email: credentials?.email });
+        const user = await UserModel.findOne({ email: credentials?.email });
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT

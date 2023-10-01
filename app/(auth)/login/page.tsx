@@ -61,7 +61,7 @@ export default function Login() {
             <div className="relative">
               <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
                 <h3 className="text-4xl font-bold text-white">
-                  A Complete Auth System For Your Next Project
+                  A Complete Auth System in Next JS
                 </h3>
                 <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                   <li className="flex items-center space-x-3">
@@ -151,7 +151,7 @@ export default function Login() {
           <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
-                Sign in
+                Sign In
               </h2>
               <p className="mt-2 text-sm text-gray-600">
                 Don&apos;t have an account?{" "}
