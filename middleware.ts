@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
 
   //Protected Routes for User
-  const userProtectedRoutes = ["/"];
+  const userProtectedRoutes = ["/dashboard"];
 
   //Protected Routes for Admin
   const adminProtectedRoutes = ["/admin/dashboard"];

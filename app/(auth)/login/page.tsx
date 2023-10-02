@@ -27,7 +27,7 @@ export default function Login() {
         signIn("credentials", {
           email: authState.email,
           password: authState.password,
-          callbackUrl: params.get("callbackUrl") || "/",
+          callbackUrl: params.get("callbackUrl") || "/dashboard",
           redirect: true,
         });
       } else if (response.status == 400) {
@@ -41,7 +41,7 @@ export default function Login() {
   // Login with google
   const googleLogin = async () => {
     await signIn("google", {
-      callbackUrl: "/",
+      callbackUrl: "/dashboard",
       redirect: true,
     });
   };
