@@ -7,7 +7,7 @@ connect();
 
 export async function POST(request: NextRequest) {
   const salt = bcrypt.genSaltSync(10);
-  const password = bcrypt.hashSync("123126476", salt);
+  const password = bcrypt.hashSync("123456789", salt);
 
   await User.create({
     email: "admin@gmail.com",

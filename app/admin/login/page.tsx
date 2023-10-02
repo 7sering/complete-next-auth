@@ -1,15 +1,26 @@
 "use client";
 
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AdminLogin() {
+  const router = useRouter();
   const [authState, setAuthState] = useState({
     email: "",
     password: "",
   });
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("submitted", authState);
+    const data = await signIn("credentials", {
+      email: authState.email,
+      password: authState.password,
+      redirect: false,
+    });
+
+    if (data?.status == 200) {
+      router.replace("/admin/dashboard");
+    }
   };
   return (
     <div className="h-screen w-screen flex justify-center items-center">
