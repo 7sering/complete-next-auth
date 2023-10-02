@@ -1,4 +1,5 @@
 "use client";
+import Toast from "@/components/Toast";
 import axios, { Axios } from "axios";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -48,6 +49,7 @@ export default function Login() {
   return (
     <>
       <section>
+        <Toast />
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
           <div className="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
             <div className="absolute inset-0">

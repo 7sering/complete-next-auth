@@ -7,7 +7,12 @@ export default function SignoutButton({ type }: { type?: string }) {
     <div>
       <button
         className="p-3 bg-green-500 text-white rounded-md"
-        onClick={() => signOut({ callbackUrl: "/login", redirect: true })}
+        onClick={() =>
+          signOut({
+            callbackUrl: type == "Admin" ? "/admin/login" : "/login",
+            redirect: true,
+          })
+        }
       >
         Sign Out
       </button>

@@ -2,6 +2,7 @@ import {
   CustomSession,
   authOptions,
 } from "@/app/api/auth/[...nextauth]/opation";
+import SignoutButton from "@/components/signoutButton";
 import { getServerSession } from "next-auth";
 import React from "react";
 
@@ -14,6 +15,7 @@ export default async function AdminDashboard() {
       <h1 className="text-sm justify-center font-bold">
         {session && JSON.stringify(session)}
       </h1>
+      <SignoutButton type="Admin" />
     </div>
   );
 }
