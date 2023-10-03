@@ -48,7 +48,7 @@ export default function Login() {
 
   return (
     <>
-      <section>
+      <section className="bg-gray-900">
         <Toast />
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
           <div className="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
@@ -152,15 +152,15 @@ export default function Login() {
           </div>
           <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
+              <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
                 Sign In
               </h2>
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="mt-2 text-sm text-gray-500">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
                   title=""
-                  className="font-semibold text-black transition-all duration-200 hover:underline"
+                  className="font-semibold text-white transition-all duration-200 hover:underline"
                 >
                   Create a free account
                 </Link>
@@ -208,7 +208,7 @@ export default function Login() {
                       <a
                         href="#"
                         title=""
-                        className="text-sm font-semibold text-black hover:underline"
+                        className="text-sm font-semibold text-white hover:underline"
                       >
                         {" "}
                         Forgot password?{" "}
@@ -245,7 +245,7 @@ export default function Login() {
                   </div>
                 </div>
               </form>
-              <p className="text-center my-3">--- OR ---</p>
+              <p className="text-center my-3 text-white">--- OR ---</p>
               <div className="mt-3 space-y-3">
                 <button
                   type="button"
