@@ -3,10 +3,10 @@ class Env {
   static SMTP_PORT: string = process.env.SMTP_PORT!;
   static SMTP_USER: string = process.env.SMTP_USER!;
   static SMTP_PASSWORD: string = process.env.SMTP_PASSWORD!;
-  static SMTP_SECURE: string = process.env.SMTP_SECURE!;
   static SMTP_FROM: string = process.env.SMTP_FROM!;
   static SECRET_KEY: string = process.env.NEXTAUTH_SECRET!;
   static APP_URL: string = process.env.APP_URL!;
+  static SMTP_SECURE: string = process.env.SMTP_SECURE!;
 }
 
 export default Env;
