@@ -13,3 +13,11 @@ type LoginErrorType = {
 type ForgotPasswordPayload = {
   email: string;
 };
+
+//Reset Password type
+type ResetPasswordPayload = {
+  email: string;
+  signature: string;
+  password: string;
+  password_confirmation: string;
+};

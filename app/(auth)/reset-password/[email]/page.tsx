@@ -5,12 +5,15 @@ import { ToastContainer, toast } from "react-toastify";
 
 import axios from "axios";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function ResetPassword({
   params,
 }: {
   params: { email: string };
 }) {
+  const searchParams = useSearchParams();
   const [authState, setAuthState] = useState({
     password: "",
     cpassword: "",
@@ -20,6 +23,26 @@ export default function ResetPassword({
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
+    setLoading(true);
+    axios
+      .post("/api/auth/reset-password", {
+        email: params.email,
+        signature: searchParams.get("signature"),
+        password: authState.password,
+        password_confirmation: authState.cpassword,
+      })
+      .then((res) => {
+        const response = res.data;
+        if (response.status == 400) {
+          toast.error(response.message, { theme: "colored" });
+        } else if (response.status == 200) {
+          toast.success(response.message, { theme: "colored" });
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log("Error....", err);
+      });
   };
   return (
     <>
@@ -66,6 +89,14 @@ export default function ResetPassword({
                 >
                   {loading ? "Processing..." : "Submit"}
                 </button>
+              </div>
+              <div className="mt-5 text-center">
+                <Link
+                  href="/login"
+                  className="text-blue-300 hover:text-orange-300 font-bold"
+                >
+                  Back To Login
+                </Link>
               </div>
             </form>
           </div>
